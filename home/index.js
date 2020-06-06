@@ -41,7 +41,7 @@ export default function Home() {
         quality: 1,
       });
       if (!result.cancelled) {
-        // setImagem(result.uri)
+        
         uploadImagem(result.uri);
 
       }

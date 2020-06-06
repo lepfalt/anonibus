@@ -23,6 +23,7 @@ exports.enviarMensagem = functions.https
       mensagem: request.body.mensagem,
       usuario: request.body.usuario,
       avatar: request.body.avatar,
+      dataEnvio: request.body.dataEnvio
     }).then(function () {
       response.json({
         "ok": true

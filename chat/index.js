@@ -24,6 +24,7 @@ export default function Chat() {
       mensagem: caixaTexto,
       usuario: user.name,
       avatar: user.picture,
+      dataEnvio: new Date().getTime()
     })
       .then(function () {
         // setMensagens([...mensagens, caixaTexto])
@@ -44,10 +45,13 @@ export default function Chat() {
           if (change.type === "added") {
             const { mensagem, usuario, avatar } = change.doc.data()
             const id = change.doc.id
-            mensagens_enviadas.push({ mensagem, usuario, avatar, id })
-          }
-        })
-        setMensagens([...mensagens_enviadas])
+            const dataEnvio = change.doc.dataEnvio
+          mensagensEnviadas.push({ mensagem, usuario, avatar, id, dataEnvio })
+        }
+      })
+      
+      let mensagensOrdenadas = mensagensEnviadas.sort((a, b) => {return a.dataEnvio - b.dataEnvio});
+      setMessages([...mensagensOrdenadas]);
         scrollview ? scrollview.scrollToEnd({ animated: true }) : null;
       })
     return () => {
